@@ -1,0 +1,9 @@
+# m h  dom mon dow  user command
+1 8 * * * root /usr/share/mini-isp/masq.sh >~/masq.log 2>&1
+1 3  * * * root /usr/share/mini-isp/foropen_new.sh >~/masq2.log 2>&1
+#2 * * * * root /usr/share/mini-isp/ruby/update_track_record.rb 
+#*/10 * * * * root /usr/share/mini-isp/test_network.sh 
+@reboot root /usr/share/mini-isp/masq.sh >/dev/null 2>&1
+#@reboot root /var/www/freenet.surething.biz/webchat2/start_webchat.sh
+
+

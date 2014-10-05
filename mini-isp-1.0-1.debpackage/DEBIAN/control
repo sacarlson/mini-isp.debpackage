@@ -1,0 +1,9 @@
+Package: mini-isp
+Version: 1.0-1
+Architecture: all
+Maintainer: Scott Carlson <sacarlson@ipipi.com>
+Section: base
+Priority: optional
+Depends:  debconf, mysql-server, adduser, bind9, apache2, php5, mysql-client, phpmyadmin, ruby-full (>= 1.9), rubygems-integration, ruby-mysql, isc-dhcp-server, ssh, whois, php5-cli
+Description: Setup for an automatic payment ISP for wifi or other lan network method:
+ Simple way to setup as a small Internet service provider, good for hotels and appartment buildings.

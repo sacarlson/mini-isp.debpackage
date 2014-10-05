@@ -1,0 +1,59 @@
+Template: mini-isp/username
+Type: string
+Default: mini_isp
+Description: Username for mini-isp account:
+ Please enter the username to use with the mini-isp account to login with ssh or desktop for this user.
+
+Template: mini-isp/password
+Type: password
+Description: Password for the mini-isp user account:
+ Please enter the password to use with the mini-isp account.
+
+Template: mini-isp/url
+Type: string
+Default: freenet.surething.biz
+Description: URL address for your ISP's apache2 server :
+ This is the URL name your customrs will see in there browser when they make transactions and get redirected.
+
+Template: mini-isp/internal_interface
+Type: string
+Default: eth0
+Description: ethernet interface that connects to the network on the customers side:
+ ethernet interface that on the customers side can be the same as what your router is hooked to if you only have one interface.
+
+Template: mini-isp/internal_ip_address
+Type: string
+Default: 192.168.2.251
+Description: this is the static ip address setting of the internal ethernet interface:
+ this address must be on a different submask address of the external interface if external interface is used.
+
+Template: mini-isp/external_interface
+Type: string
+Default: eth1
+Description: NIC that connects to the network on the same side as router to wan side:
+ this can be the same NIC interface as internal NIC if set to single network mode.
+
+Template: mini-isp/external_ip_address
+Type: string
+Default: 192.168.1.251
+Description: this is the static ip address setting of the external ethernet interface:
+ this address must be on a different submask address of the internal interface if external interface is used.
+
+Template: mini-isp/router_ip_address
+Type: string
+Default: 192.168.2.252
+Description: this is the static ip address setting of the of your adsl router:
+ this is the device that hooks to your ISP normaly an adsl box. it's IP can be changed if needed also.
+
+Template: mini-isp/singlenet
+Type: boolean
+Default: true
+Description: if set only single NIC is used, external ethernet NIC settings will be ignored:
+ You will only need or use a single NIC if this box set.
+
+Template: mini-isp/autostart
+Type: boolean
+Default: true
+Description: set auto start at boot:
+ check this box if you want to auto start mini-isp at the boot up of your system.
+

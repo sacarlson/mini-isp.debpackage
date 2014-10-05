@@ -1,0 +1,12 @@
+#!/usr/bin/ruby
+$host = 'localhost'
+$user = 'username'
+$password = 'password'
+$database = 'freenet2'
+$workingdir = '/home/freenet/ruby/'
+$vuzehost = '192.168.2.250'
+$vuzeuser = 'freenet'
+$vuzepass = 'password'
+$vuzebwlimit = 20
+
+

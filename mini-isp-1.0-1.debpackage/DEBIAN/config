@@ -1,0 +1,110 @@
+#!/bin/sh
+## debconf config script for mini-isp
+## mini-isp (c) 2014 Scott Carlson sacarlson@ipipi.com
+##
+## This script runs before copying the files of the package to the correct
+## locations in the system.
+##
+## It gets the appropriate configuration values and stores them in the debconf
+## database. If necessary it asks the user about some needed information.
+##
+## This file is human readable by using "grep '#' <thisfile>"
+#
+set -e
+
+# -*- sh -*-
+# This file can be included with #SCRIPTSCOMMON#
+
+# Fire up debconf and ensure it is at least version 2.0
+# Usage: load_debconf2 "$@"  - needed as debconf will exec the current script,
+# passing the current shell parameters. So we must lift these into the shell
+# function. Missing this caused bug #555151.
+load_debconf2() {
+   . /usr/share/debconf/confmodule
+   if ! db_version 2.0; then
+      echo >&2 "$0: need DebConf 2.0 or later"
+      exit 1
+   fi
+}
+
+# Usage: y=`quote_backslashes "$x"`
+# Quotes each backslash in $x with another backslash, outputs result.
+quote_backslashes() {
+  echo -n "$1" | sed 's,\\,\\\\,g'
+}
+
+
+load_debconf2 "$@"
+
+get_data() {
+      db_get mini-isp/username
+      username=$RET
+      db_get mini-isp/password
+      password=$RET
+      db_get mini-isp/url
+      url=$RET
+      db_get mini-isp/internal_interface
+      internal_interface=$RET
+      db_get mini-isp/internal_ip_address
+      internal_ip_address=$RET
+      db_get mini-isp/external_interface
+      external_interface=$RET
+      db_get mini-isp/external_ip_address
+      external_ip_address=$RET
+      db_get mini-isp/router_ip_address
+      router_ip_address=$RET
+      db_get mini-isp/autostart
+      autostart=$RET
+      db_get mini-isp/singlenet
+      singlenet=$RET
+}
+
+get_input() {
+      db_input critical mini-isp/username || true 
+      db_input critical mini-isp/password || true     
+      db_input critical mini-isp/url || true    
+      db_input critical mini-isp/internal_interface || true     
+      db_input critical mini-isp/internal_ip_address || true
+      db_input critical mini-isp/router_ip_address || true   
+      db_input critical mini-isp/autostart || true    
+      db_input critical mini-isp/singlenet || true 
+      db_go
+      db_get mini-isp/singlenet
+      singlenet=$RET 
+      if [ $singlenet = "false" ]; then
+        db_input critical mini-isp/external_interface || true   
+        db_input critical mini-isp/external_ip_address || true               
+        db_go
+      fi
+}
+
+add_user() {
+  load_debconf2 "$@"
+  db_get mini-isp/username
+  username=$RET
+  if id -u $username >/dev/null 2>&1; then
+    echo "user $username already exist will skip creation \n"
+    exit 0
+  fi
+  db_get mini-isp/password
+  password=$(echo "$RET"|sed -e "s/'/\\\\'/g")
+  hashpassword=$(mkpasswd -msha-512 $password)
+  echo "username = $username \n"  
+  echo "password = $password \n"
+  echo " hashpassword = $hashpassword \n"
+  useradd -U -r -d /home/$username -G sudo -m -p $hashpassword $username
+}
+
+if [ "$1" = "configure" ]; then
+    
+	#create_new_config
+    get_input
+    #add_user
+	exit 0
+ 
+elif [ "$1" = "reconfigure" ] ; then
+
+  #create_new_config
+  get_input
+  rm -f /etc/mini-isp.conf 
+fi  

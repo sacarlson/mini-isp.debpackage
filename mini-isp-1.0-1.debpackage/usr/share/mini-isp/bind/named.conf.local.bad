@@ -1,0 +1,30 @@
+    zone "com" {
+            type master;
+	    file "/etc/bind/zones/bad.com.db";	   
+    };
+    
+    zone "net" {
+            type master;
+	    file "/etc/bind/zones/bad.net.db";	   
+    };
+
+    zone "org" {
+            type master;
+	    file "/etc/bind/zones/bad.org.db";
+    };
+
+    zone "th" {
+            type master;
+	    file "/etc/bind/zones/bad.th.db";
+    };
+
+    zone "freenet.surething.biz" {
+            type master;
+	    file "/etc/bind/zones/freenet.surething.biz.db";	   
+    };
+
+   
+    
+
+
+

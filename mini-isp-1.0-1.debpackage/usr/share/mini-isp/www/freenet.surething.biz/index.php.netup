@@ -1,0 +1,8 @@
+<?php
+ include('config.php');
+ header("Cache-Control: no-cache, must-revalidate");
+ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+ #$header_string= "refresh: 0; url= " . HTTP_SERVER . "/login3.php";
+ $header_string= "refresh: 0; url= ./login3.php";
+ header( $header_string );
+?>

@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+echo "start postrm \n"
+if [ $1 = purge ] ; then 
+    rm -f /etc/mini-isp.conf
+fi
+
+# Automatically added by dh_installdebconf
+if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+
+echo "before start of pgrep \n"
+  rm -f /etc/bind/named.local.conf.bad
+  rm -f /etc/bind/named.local.conf.good
+  rm -f /etc/bind/named.local.conf
+  rm -f /etc/dhcp/dhcpd.conf
+  update-rc.d -f mini-isp remove
+  #invoke-rc.d mini-isp stop
+  
+#if pgrep -x ssh >/dev/null 2>&1
+#then
+#  echo "ssh is running will kill all of them"
+#  pkill -x ssh >/dev/null 2>&1
+#fi
+exit 0

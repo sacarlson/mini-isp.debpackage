@@ -1,0 +1,40 @@
+#! /bin/sh
+# mini-isp /etc/init.d/mini-isp
+# to be used to auto start mini-isp at boot time
+set -e 
+
+do_start () {
+   echo "start mini-isp with masq.sh \n"
+    /usr/share/mini-isp/masq.sh
+    sleep 2
+    /etc/init.d/bind9 restart
+  }
+
+do_stop () {
+  echo "stoping mini-isp, shut down dhcp server and flush iptables filters \n"
+    #turn off all iptables filters
+    /usr/share/mini-isp/foropen_new.sh
+    #shut down dhcp server
+	/etc/init.d/isc-dhcp-server stop
+  }
+
+case "$1" in
+start)
+    do_start
+	;;
+stop)
+    do_stop
+	;;
+restart|reload|force-reload)
+	do_stop
+	do_start
+	;;
+force-start)
+	FORCE_START="yes"
+	do_start
+	;;
+*)
+	echo "Usage: mini-isp {start|stop|restart|reload|force-reload|force-start}"
+	exit 1
+	;;
+esac
