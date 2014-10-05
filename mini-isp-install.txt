@@ -1,0 +1,43 @@
+mini-isp-1.0-1
+
+install instructions
+double click in caja the deb file mini-isp-1.0-1.deb and select install button
+it may return with failure with dependancys to fix this from term:
+sudo apt-get -f install 
+
+or totaly from the command line:
+cd to directory with the mini-isp-1.01.deb file
+sudo apt-get install gdebi  #may not need as it seems linux mint installs it by default
+gdebi mini-isp-1.0-1.deb
+sudo apt-get -f install   #may not need as my last install the line above already installed dependancies
+
+
+
+This will install mini-isp and the needed dependencies for it.
+
+note for phpmyadmin in text mode install be sure to use the space bar to check the box for apache2 as database then tab 
+to the <ok> and return.  I have failed to get this working at times because I thought the red box was already selected but
+it is NOT, it must have a X in the box.
+
+There will be some questions asked when it installs mysql-server.  be sure the password you enter here matches what you enter for password in mini-isp-1.0-1.
+
+also be sure your computer has about 15G harddisk space for the operating system and for this package and it's dependancies.
+
+
+the default settings should work in most cases, just be sure to enter a password.  Also note at this time I didn't add any custom network masks so I think only the 192.168.X.X will work for eth0 and eth1 or other nics.  
+
+after install make sure you turn off the dhcp service on your ADSL router.  This can normally be done by loging into your box with a browser.  to find out the address of your router you can try:
+route -n
+this will return a line with flags UG in it that starts with the ip address presently used as your gateway when your system is  set to dhcp-client mode.  
+
+
+The default mysql mini-isp data has a few product contracts in it and also has me scotty as your first customer just setup for test. There are also other contracts on oscommerce that you might use with different time windows.
+ also note that the currency is set to default to thai baht. All these things can be change in oscommerce in admin settings.  at some point I guess I will need to write a small manual about detailed setup that can be done in oscommerce and phpmyadmin.  you can also modify the default pics and banners if you want to brand it differently.  If you need help with that I would be glad to help you.
+
+for testing make sure the mysql database is working in both masq.sh and in the browser at freenet.surething.biz.  I have some added testing tools I will explain later that are also in the package.  be sure you can access both freenet.surething.biz, freenet.surething.biz/catalog2/  and freenet.surething.biz/catalog2/admin and make sure they all work.  Try some added computers to see they are redirected to freenet.surething.biz before they have working accounts
+and after they start accounts and before and after they login to the mini-isp network to see that they get to the WAN internet when we would expect it.
+
+
+
+
+
