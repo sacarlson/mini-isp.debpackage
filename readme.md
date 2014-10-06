@@ -29,10 +29,14 @@ Note: the debian package version of the original mini-isp features disabled by d
 ##Instalation:
  Simplified install instructions
  download mini-isp-x.x-x.deb  from https://github.com/sacarlson/mini-isp.debpackage/blob/master/mini-isp-1.0-1.deb .
+ Note it seems the only way I know at preset to download the deb file needed is to download the entire mini-isp.debpackage.
  then from terminal system you downloaded file to:
 
- cd /path/of/deb/file
- sudo gdebi mini-isp-1.0-1.deb
+ sudo apt-get update;
+
+ cd /path/of/deb/file;
+ 
+ sudo gdebi mini-isp-1.0-1.deb; 
 
  This will install all dependancies needed and ask you the needed questions to complete the install of mini-isp
 
