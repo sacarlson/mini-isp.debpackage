@@ -1018,7 +1018,7 @@
     } else {
       $greeting_string = sprintf(TEXT_GREETING_GUEST, tep_href_link(FILENAME_LOGIN, '', 'SSL'), tep_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL'));
     }
-   $greeting_string = '<h1> '. $greeting_string . '.  First time customers will need to create an account, after creation of a new account you will be provided a FREE 24 hour free trail auto deposited to your account before a purchase is needed.  If you already have an account and would like to check your expire date then <a href="http://freenet.surething.biz"><u>log yourself in here </u></a> where it will display your expire date and status.  If you find you are expired you can purchase yourself another one or more of the contracts below</h1>'; 
+   $greeting_string = '<h1> '. $greeting_string . '.  First time customers will need to create an account, after creation of a new account you will be provided a FREE 24 hour free trail auto deposited to your account before a purchase is needed.  If you already have an account and would like to check your expire date then <a href="../index.php"><u>log yourself in here </u></a> with a login attempt it will display your expire date and status.  If you find you are expired you can purchase yourself another one or more of the contracts below</h1>'; 
     return $greeting_string;
   }
 
