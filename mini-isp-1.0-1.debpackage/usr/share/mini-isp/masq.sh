@@ -240,9 +240,10 @@ fi
 #$IPTABLES -t nat -A POSTROUTING -o $EXTIF -j SNAT --to $EXTIP
 
 if [ "$singlenet" = "true" ]; then
-  echo "singlenet set true so will not enable masquerade \n"
+   echo "singlenet set true so will ignore nic output on  masquerade \n"
+  $IPTABLES  -t nat -A POSTROUTING  -j MASQUERADE
 else
-  echo "   Enabling SNAT (MASQUERADE) functionality on $EXTIF"
+  echo "   Enabling postrouthing (MASQUERADE) functionality on $EXTIF"
   $IPTABLES  -t nat -A POSTROUTING -o $EXTIF -j MASQUERADE
 fi
 echo -e "\nrc.firewall-iptables v$FWVER done.\n"
@@ -285,19 +286,5 @@ $IPTABLES -t nat -A PREROUTING -p tcp --sport 53 -j RETURN
 $IPTABLES -t nat -A PREROUTING -p tcp  -j DNAT --to-destination $EXTIP
 $IPTABLES -t nat -A PREROUTING -p udp  -j DNAT --to-destination $EXTIP
 
-
-# reset apaipac
-#/usr/sbin/fetchipac -S
-
-#turn on fairnat
-#cd /usr/share/mini-isp/fairnat
-#echo "start fairnat (fairnat now disabled temp) \n"
-#/usr/share/mini-isp/fairnat/fairnat-0.80-dhcp.sh
-# we are now testing this new bandwidth control as alternative to fairnat started dec 7, 2013
-#  bwc.sh is broken or at least it might be so disable until we test it
-#/usr/share/mini-isp/bwc.sh restart
-#
-#  in the envent we want to test without having dhcp active uncomment bellow
-#sleep 3
-#/etc/init.d/isc-dhcp-server stop
+/usr/share/mini-isp/bwc_whitelist.sh start
 echo "end masq.sh"

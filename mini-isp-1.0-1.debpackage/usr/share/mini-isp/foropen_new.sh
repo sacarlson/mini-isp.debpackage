@@ -30,12 +30,12 @@ echo -e "\n\nLoading simple rc.firewall-iptables version $FWVER..\n"
 #sleep 2
 
 /usr/share/mini-isp/ruby/gen_whitelist.rb
-/usr/share/mini-isp/ruby/make_fairnat.config.rb
+#/usr/share/mini-isp/ruby/make_fairnat.config.rb
 /usr/share/mini-isp/ruby/set_perm_ip.rb
 /usr/share/mini-isp/ruby/make_dhcpd.conf.rb
 sudo cp /usr/share/mini-isp/ruby/dhcpd.conf /etc/dhcp/dhcpd.conf
 sleep 2
-sudo /etc/init.d/dhcp3-server restart
+#sudo /etc/init.d/dhcp3-server restart
 sudo /etc/init.d/isc-dhcp-server restart
 # The location of the iptables and kernel module programs
 #
@@ -121,7 +121,8 @@ for x in `grep -v ^# $WHITELIST | awk '{print $1}'`; do
 done
 echo "set forward accept on input \n"
 if [ "$singlenet" = "true" ]; then
-  echo "singlenet set true so will not forward input \n"
+  echo "singlenet set true so will not forward extif input \n"
+  $IPTABLES -A FORWARD -i $INTIF -j ACCEPT
 else
   echo "singlenet set false so will try enable forward input \n"
   $IPTABLES -A FORWARD -i $EXTIF -j ACCEPT
@@ -144,12 +145,13 @@ $IPTABLES -A INPUT -p udp --dport 137:138 -j DROP
 # end samba local filter
 
 if [ "$singlenet" = "true" ]; then
-  echo "singlenet set true so will not enable masquerade \n"
+  echo "singlenet set true so will ignore nic output on  masquerade \n"
+   $IPTABLES  -t nat -A POSTROUTING -j MASQUERADE
 else
   echo "   Enabling SNAT (MASQUERADE) functionality on $EXTIF"
   $IPTABLES  -t nat -A POSTROUTING -o $EXTIF -j MASQUERADE
 fi
 
-# reset ipaipac
-#/usr/sbin/fetchipac -S
-#echo -e "\nrc.firewall-iptables v$FWVER done.\n"
+/usr/share/mini-isp/bwc_whitelist.sh stop
+
+echo "foropen_new.sh completed \n"
