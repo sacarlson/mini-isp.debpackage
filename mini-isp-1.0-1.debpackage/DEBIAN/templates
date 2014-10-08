@@ -11,7 +11,7 @@ Description: Password for the mini-isp user account:
 
 Template: mini-isp/url
 Type: string
-Default: freenet.surething.biz
+Default: freenet4.surething.biz
 Description: URL address for your ISP's apache2 server :
  This is the URL name your customrs will see in there browser when they make transactions and get redirected.
 
