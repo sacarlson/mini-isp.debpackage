@@ -41,6 +41,6 @@ This will install all the dependancies needed and ask you the needed questions t
 The default values will work in most cases but you do need to enter a password for the mysql database.
 
 For more detailed install instructions and hardware setup illistrations and examples see:
-* [mini-isp wiki](wiki/home)
+* [mini-isp wiki](https://github.com/sacarlson/mini-isp.debpackage/wiki)
 
  I would also welcome others input to add documentation for install and usage.  Any other feedback is always welcome, good or bad.
