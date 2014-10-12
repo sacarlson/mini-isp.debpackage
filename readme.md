@@ -15,30 +15,32 @@ Mini ISP is a group of integrated programs and infrastructure needed to setup a 
 
 ##Features:
 * Easy debian package installation to install on Linux Mint or Ubuntu and possibly other Debian dirivitives.
-* Oscommerce driven store to provide automated customer purchase of service contracts.
 * Captive Portal with or without the use of a freeradius server.
-* Customer authentication and time/bandwidth usage accounting for each.
+* Oscommerce driven store to provide automated customer purchase of service contracts.
+* Customer authentication and time/bandwidth usage accounting for each user.
 * Limited services provided to unregistered customers by iptables redirection.
+* Ajustable bandwidth limits on customers usage to prevent a single user from killing the network.
 * Autostart mini-isp system at boot time
-* Added optional support to encorporate Coova Chilli captive portal with freeradius authentication, optional.
 
   See http://freenet.surething.biz to demo a working site.
 
-Note: the debian package version of the original mini-isp features disabled by default but can be customized to include them.  This was done to simplify a basic install with minimal features.
+Note: this debian packaged version of the original mini-isp has some features disabled by default but can be customized to include them.  This was done to simplify a basic install with minimal features.
 
-##Instalation:
- Simplified install instructions
- download mini-isp-x.x-x.deb  from https://github.com/sacarlson/mini-isp.debpackage/blob/master/mini-isp-1.0-1.deb .
- Note it seems the only way I know at preset to download the deb file needed is to download the entire mini-isp.debpackage.
- then from terminal system you downloaded file to:
+##Installation:
+ Simplified install instructions:
 
- sudo apt-get update;
+ ```
+git clone https://github.com/sacarlson/mini-isp.debpackage.git
+cd mini-isp.debpackage
+sudo apt-get update
+sudo gdebi ./mini-isp-1.0-1.deb 
 
- cd /path/of/deb/file;
- 
- sudo gdebi mini-isp-1.0-1.deb; 
+```
 
- This will install all dependancies needed and ask you the needed questions to complete the install of mini-isp
+This will install all the dependancies needed and ask you the needed questions to complete the install of mini-isp.
+The default values will work in most cases but you do need to enter a password for the mysql database.
 
- I've also added some slightly more detailed install docs that can be seen here: https://github.com/sacarlson/mini-isp.debpackage/blob/master/mini-isp-install.txt .
- I will later add more detail for install if we find it needed.  I would welcome others input to add documentation for install.  Any other feedback is always welcome, good or bad.
+For more detailed install instructions and hardware setup illistrations and examples see:
+* [mini-isp wiki](wiki/home)
+
+ I would also welcome others input to add documentation for install and usage.  Any other feedback is always welcome, good or bad.
